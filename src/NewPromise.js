@@ -2,7 +2,69 @@ import React, { Component } from "react";
 
 class NewPromise extends Component {
   componentDidMount() {
-    this.newPromiseTest();
+    // this.newPromiseTest();
+    const p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject("hello1");
+      }, 1000);
+    })
+      .then(
+        result => {
+          console.log("p1成功", result);
+          return 111;
+        },
+        result =>{
+          console.log("p1失败", result)
+          return 'p1失败';
+        } 
+      )
+      .catch(e => e);
+
+    const p2 = new Promise((resolve, reject) => {
+      // throw new Error("报错了");
+      reject("hello2");
+    })
+      // .then(
+      //   result => {
+      //     console.log("p2成功", result);
+      //     return "p2 success";
+      //   },
+      //   result => {
+      //     console.log("p2失败", result);
+      //     return "p2 fail";
+      //   }
+      // )
+      // .catch(e => e);
+
+    const p3 = new Promise((resolve, reject) => {
+      resolve("hello3");
+    })
+      .then(
+        result => {
+          console.log("p3成功", result);
+        },
+        result => console.log("p3失败", result)
+      )
+      .catch(e => e);
+
+    // Promise.all([p1, p2, p3])
+    //   .then(result => console.log("all", result), r => console.log("err", r))
+    //   .catch(e => console.log(e));
+
+    // Promise.race([p1, p2, p3])
+    //   .then(result => console.log("race", result), r => console.log("err", r))
+    //   .catch(e => console.log(e));
+
+      // Promise.allSettled([p1, p2, p3])
+      // .then(result => console.log("race", result), r => console.log("err", r))
+      // .catch(e => console.log(e));
+
+
+      // Promise.any([p1, p2, p3])
+      // .then(result => console.log("race", result), r => console.log("err", r))
+      // .catch(e => console.log(e));
+
+    console.log(p1, p2, p3);
   }
 
   newPromiseTest = () => {
@@ -53,6 +115,8 @@ class NewPromise extends Component {
         }, 0);
       }
 
+      // 实现promise all 所有
+
       // 立即执行传入promise的函数 并将resolve和reject作为参数
       try {
         fn(resolve, reject);
@@ -60,6 +124,11 @@ class NewPromise extends Component {
         reject(e);
       }
     }
+
+    // promise的静态方法
+    MyPromise.all = function(arr) {
+      // 传递进来的是一个数组
+    };
 
     // 定义promise的then函数返回新的promise
     MyPromise.prototype.then = function(onFulfilled, onRejected) {
