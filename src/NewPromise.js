@@ -14,7 +14,7 @@ class NewPromise extends Component {
           return 111;
         },
         result =>{
-          console.log("p1失败", result)
+          console.log("p1失败", result);
           return 'p1失败';
         } 
       )
